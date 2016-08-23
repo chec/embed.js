@@ -8,7 +8,7 @@
            bare: true
          },
          files: {
-           'build/embed.js': ['src/embed.coffee']
+           'build/embed.unminified.js': ['src/embed.coffee']
          }
        }
      },
@@ -22,7 +22,7 @@
   },
     my_target: {
       files: {
-        'build/embed.min.js': ['build/embed.js']
+        'build/embed.js': ['build/embed.unminified.js']
       }
     }
   },
