@@ -5,7 +5,7 @@ add_iframe = (e, g, base_url) ->
   n.setAttribute 'class', 'checEmbedWrapper'
   n.setAttribute 'style', 'display: none; position: fixed; width: 100%; height: 100%; top: 0; left: 0; -webkit-transform: rotate3d(0, 0, 0, 0); -moz-transform: rotate3d(0, 0, 0, 0); -ms-transform: rotate3d(0, 0, 0, 0); -o-transform: rotate3d(0, 0, 0, 0); transform: rotate3d(0, 0, 0, 0); background-color: rgba(0,0,0,0.8); background: -webkit-radial-gradient(center, rgba(36, 36, 36, 0.25), rgba(13, 13, 13, 0.85)); background: -moz-radial-gradient(rgba(36, 36, 36, 0.25), rgba(13, 13, 13, 0.85)); background: -o-radial-gradient(rgba(36, 36, 36, 0.25), rgba(13, 13, 13, 0.85)); background: -ms-radial-gradient(rgba(36, 36, 36, 0.25), rgba(13, 13, 13, 0.85)); z-index: 9992;'
   n.innerHTML = '
-  <div id="preloader-' + e + '" style="margin-top:20%; text-align:center;">
+  <div id="preloader" style="margin-top:20%; text-align:center;">
   <style type="text/css">
     @-webkit-keyframes uil-default-anim {
         0% {
@@ -233,7 +233,7 @@ set_opacity = (e, t) ->
 
     if t == 'Chec.Checkout.Ready'
       show_iframe 'Chec-Embed'
-      r = document.getElementById('preloader-' + n)
+      r = document.getElementById('preloader')
       r.style.display = 'none'
     return
   ), false
