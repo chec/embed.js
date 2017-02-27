@@ -113,14 +113,11 @@ set_opacity = function(e, t) {
   e.addEventListener('message', (function(e) {
     var t;
     var r;
-    t = e.data;
-    if (t === 'close-paypal') {
-      alert('hide-paypal');
-    }
-    if (t === 'Chec.Checkout.Close') {
+    t = JSON.parse(e.data);
+    if (t.event === 'CheckoutClose') {
       hide_iframe('Chec-Embed');
     }
-    if (t === 'Chec.Checkout.Ready') {
+    if (t.event === 'CheckoutReady') {
       show_iframe('Chec-Embed');
       r = document.getElementById('preloader');
       r.style.display = 'none';

@@ -223,15 +223,12 @@ set_opacity = (e, t) ->
 
     #`var n`
     `var t`
-    t = e.data
+    t = JSON.parse(e.data)
     #n = e.data[1]
-
-    if t == 'close-paypal'
-      alert 'hide-paypal'
-    if t == 'Chec.Checkout.Close'
+    if t.event == 'CheckoutClose'
       hide_iframe 'Chec-Embed'
 
-    if t == 'Chec.Checkout.Ready'
+    if t.event == 'CheckoutReady'
       show_iframe 'Chec-Embed'
       r = document.getElementById('preloader')
       r.style.display = 'none'
