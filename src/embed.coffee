@@ -1,4 +1,5 @@
 add_iframe = (e, g, base_url) ->
+  console.log(e, g, base_url)
   t = document.createDocumentFragment()
   n = document.createElement('div')
   n.setAttribute 'id', 'checEmbedCheckout-' + e
@@ -112,15 +113,6 @@ overflow-x: hidden;">
   show_iframe 'checEmbedCheckout-' + e
   false
 
-add_style = ->
-  e = document.createDocumentFragment()
-  t = document.createElement('style')
-  t.setAttribute 'id', 'chec-stylesheet'
-  t.innerHTML = ''
-  e.appendChild t
-  document.body.insertBefore e, document.body.childNodes[0]
-  false
-
 show_iframe = (e) ->
   t = document.getElementById(e)
 
@@ -155,76 +147,91 @@ set_opacity = (e, t) ->
   e.style.filter = 'alpha(opacity=' + t * 100 + ');'
   return
 
-((e, t) ->
+# Recurse the clicked target to see if we can work out whether an anchor was clicked or not. Return the anchor
+# clicked if one is found, otherwise false.
+get_anchor = (element) ->
+  # Is there a current element (or a provided parent)?
+  if element == null
+    return false
+  # Is the current element an anchor?
+  if element.tagName.toLowerCase() == 'a'
+    return element
+  # Check if parent element is an anchor
+  return get_anchor(element.parentElement)
 
-  n = ->
-    `var n`
-    `var e`
-    #add_style()
-    if /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
-      return
-    accepted_links = [
-      'http://checkout.chec.dev',
-      'https://ch.eckout.com',
-      'https://checkout.trychec.com',
-      'http://ch.eckout.com',
-      'http://checkout.trychec.com',
-      'http://stage.ch.eckout.com/pay',
-      'http://checkout.chec.dev/pay',
-      'https://ch.eckout.com/pay',
-      'https://checkout.trychec.com/pay',
-      'http://ch.eckout.com/pay',
-      'http://checkout.trychec.com/pay',
-      'https://checkout.chec.io',
-      'http://stage.checkout.chec.io'
-    ]
-    n = 0
-    e = t.getElementsByTagName('a')
+# Determine if the URL for the clicked anchor is a Chec URL, that should trigger the embed frame. If it's a Chec
+# URL then we return an object containing the necessary parts to construct the iframe, otherwise return false.
+get_chec_url_parts = (anchor) ->
+  urlPath = anchor.href.split('/').pop()
+  permalink = urlPath.split('?').shift()
+  prefill = urlPath.split('?').pop()
+  baseUrl = anchor.href.substring(0, anchor.href.lastIndexOf('/'))
 
-    while n < e.length
-      r = e[n]
-      i = e[n].getAttribute('href')
+  # Links containing these domains will be converted into embed URLs
+  accepted_links = [
+    'https://checkout.chec.io',
+    'https://checkout-stage.chec.io',
+    'http://checkout.chec.local'
+  ]
 
-      if i != null
-        s = i.split('/').pop()
-        q = s.split('?').pop()
-        k = s.split('?')
-        o = i.substring(0, i.lastIndexOf('/'))
+  # Does the base URL match our accepted links?
+  if accepted_links.indexOf(baseUrl) > -1
+    return {
+      permalink: permalink,
+      prefill: '&' + prefill,
+      baseUrl: baseUrl
+    }
 
+  # Back up in case the URL's been rewritten, look at the product-id attribute
+  if (anchor.hasAttribute('data-chec-product-id'))
+    return {
+      permalink: anchor.getAttribute('data-chec-product-id'),
+      prefill: '&' + prefill,
+      baseUrl: 'https://checkout.chec.io'
+    }
 
-        if accepted_links.indexOf(o) > -1
-          r.removeAttribute 'target'
-          r.setAttribute 'data-permalink', k[0]
-          r.setAttribute 'data-prefill', '&' + q
-          r.setAttribute 'data-base-url', i.substring(0, i.lastIndexOf('/'))
-          r.addEventListener 'click', ((e) ->
-            add_iframe @getAttribute('data-permalink'), @getAttribute('data-prefill'), @getAttribute('data-base-url')
-            false
-          ), false
-          r.href = '#'
-        ##Back up incase the url's been rewritten
-        else if r.hasAttribute('data-chec-product-id')
-          r.removeAttribute 'target'
-          r.setAttribute 'data-permalink', r.getAttribute('data-chec-product-id')
-          r.setAttribute 'data-prefill', '&' + q
-          r.setAttribute 'data-base-url', 'https://checkout.chec.io'
-          r.addEventListener 'click', ((e) ->
-            add_iframe @getAttribute('data-permalink'), @getAttribute('data-prefill'), @getAttribute('data-base-url')
-            false
-          ), false
-          r.href = '#'
+  # Not a Chec URL
+  return false
 
-      n++
+# Handle clicks on something in the window
+handle_click = (event) ->
+  # Don't run on mobile devices
+  if /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)
     return
+
+  # Check whether the click was on an anchor
+  anchor = get_anchor(event.target)
+  if !anchor
+    return
+
+  # Check if the clicked URL is for a Chec product URL, and get the components of it for the iframe if so
+  urlParts = get_chec_url_parts(anchor)
+  if urlParts
+    anchor.removeAttribute 'target'
+    anchor.setAttribute 'data-permalink', urlParts.permalink
+    anchor.setAttribute 'data-prefill', urlParts.prefill
+    anchor.setAttribute 'data-base-url', urlParts.baseUrl
+
+    # Trigger iframe creation
+    add_iframe(urlParts.permalink, urlParts.prefill, urlParts.baseUrl)
+    event.preventDefault()
+    return
+
+  # Click target is either not an anchor, or is not a Chec product link. Do nothing.
+
+# Register the click handler to the window
+register_click_handler = () ->
+  document.addEventListener('click', handle_click, false)
+
+# Bind necessary event handlers when the document is loaded
+((e, t) ->
+  register_click_handler()
   if e.checkoutLoaded
     return
   e.checkoutLoaded = true
   e.addEventListener 'message', ((e) ->
-
-    #`var n`
     `var t`
     t = JSON.parse(e.data)
-    #n = e.data[1]
     if t.event == 'CheckoutClose'
       hide_iframe 'Chec-Embed'
 
@@ -234,9 +241,5 @@ set_opacity = (e, t) ->
       r.style.display = 'none'
     return
   ), false
-  if e.addEventListener
-    e.addEventListener 'load', n, false
-  else
-    e.attachEvent 'onload', n
   return
 ) window, document
