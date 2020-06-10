@@ -1,5 +1,4 @@
 add_iframe = (e, g, base_url) ->
-  console.log(e, g, base_url)
   t = document.createDocumentFragment()
   n = document.createElement('div')
   n.setAttribute 'id', 'checEmbedCheckout-' + e
@@ -225,10 +224,14 @@ register_click_handler = () ->
 
 # Bind necessary event handlers when the document is loaded
 ((e, t) ->
-  register_click_handler()
+  # Ensure the script wasn't loaded multiple times
   if e.checkoutLoaded
     return
   e.checkoutLoaded = true
+
+  # Register click handler which kicks off the embed handler
+  register_click_handler()
+
   e.addEventListener 'message', ((e) ->
     `var t`
     t = JSON.parse(e.data)

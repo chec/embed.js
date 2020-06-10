@@ -2,7 +2,6 @@ var add_iframe, get_anchor, get_chec_url_parts, handle_click, hide_iframe, regis
 
 add_iframe = function(e, g, base_url) {
   var n, t;
-  console.log(e, g, base_url);
   t = document.createDocumentFragment();
   n = document.createElement('div');
   n.setAttribute('id', 'checEmbedCheckout-' + e);
@@ -130,11 +129,13 @@ register_click_handler = function() {
 
 // Bind necessary event handlers when the document is loaded
 (function(e, t) {
-  register_click_handler();
+  // Ensure the script wasn't loaded multiple times
   if (e.checkoutLoaded) {
     return;
   }
   e.checkoutLoaded = true;
+  // Register click handler which kicks off the embed handler
+  register_click_handler();
   e.addEventListener('message', (function(e) {
     var t;
     var r;
