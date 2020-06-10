@@ -27,3 +27,8 @@ regression test against it.
 ## Testing
 
 See `examples/default.html` for a variety of test buttons that can be used to try this out as you make changes to it.
+
+## Deployment
+
+There is nothing automated set up to deploy this. You will need to manually copy `build/embed.js` into the `chec`
+Space on DigitalOcean, renaming it to `embed.js`: https://cloud.digitalocean.com/spaces/chec?i=77b324&path=js%2F.
