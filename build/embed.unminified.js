@@ -74,7 +74,7 @@ get_chec_url_parts = function(anchor) {
   prefill = urlPath.split('?').pop();
   baseUrl = anchor.href.substring(0, anchor.href.lastIndexOf('/'));
   // Links containing these domains will be converted into embed URLs
-  accepted_links = ['https://checkout.chec.io', 'https://checkout-stage.chec.io', 'http://checkout.chec.local'];
+  accepted_links = ['https://checkout.chec.io', 'https://checkout-stage.chec.io', 'https://checkout.chec.local'];
   // Does the base URL match our accepted links?
   if (accepted_links.indexOf(baseUrl) > -1) {
     return {

@@ -170,7 +170,7 @@ get_chec_url_parts = (anchor) ->
   accepted_links = [
     'https://checkout.chec.io',
     'https://checkout-stage.chec.io',
-    'http://checkout.chec.local'
+    'https://checkout.chec.local',
   ]
 
   # Does the base URL match our accepted links?
