@@ -1,5 +1,27 @@
 {
-  "private": true,
+  "name": "@chec/embed.js",
+  "version": "0.0.1",
+  "description": "A small embeddable hosted checkout using Commerce.js",
+  "author": "Chec Platform Inc",
+  "license": "BSD-3-Clause",
+  "homepage": "https://commercejs.com",
+  "keywords": [
+    "commerce",
+    "shop",
+    "ecommerce",
+    "chec",
+    "chec.io",
+    "sdk",
+    "checkout",
+    "embed"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chec/embed.js"
+  },
+  "bugs": {
+    "url": "https://github.com/chec/embed.js/issues/new"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-coffee": "*",
