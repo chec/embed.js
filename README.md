@@ -1,7 +1,14 @@
-# Chec embeddable checkout
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="500" height="100" />
+</p>
+<p align="center">
 This repository is for building `embed.js`, which can be used by small-scale merchants to embed a hosted checkout
 in their website.
+</p>
+
+<p align="center">
+  <a href="https://commercejs.com">commercejs.com</a> | <a href="https://twitter.com/commercejs">@commercejs</a> | <a href="http://slack.commercejs.com">Slack</a>
+</p>
 
 ## Installation
 
@@ -28,7 +35,6 @@ regression test against it.
 
 See `examples/default.html` for a variety of test buttons that can be used to try this out as you make changes to it.
 
-## Deployment
+## License
 
-There is nothing automated set up to deploy this. You will need to manually copy `build/embed.js` into the `chec`
-Space on DigitalOcean, renaming it to `embed.js`: https://cloud.digitalocean.com/spaces/chec?i=77b324&path=js%2F.
+Released under BSD-3-Clause, [see here](LICENSE.md).

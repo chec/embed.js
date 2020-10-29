@@ -80,12 +80,14 @@ add_iframe = (e, g, base_url) ->
         -webkit-animation-delay: 0.375s;
         animation-delay: 0.375s;
     }
-    .loader-node { top: 90px;
-left: 96px;
-width: 8px;
-height: 20px;
-background: #FFFFFF;
-box-shadow:0px 0px 3px rgba(0, 0, 0, 0.15) }
+    .loader-node {
+        top: 90px;
+        left: 96px;
+        width: 8px;
+        height: 20px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.15);
+    }
 </style>
 <div class="uil-default-css" style="-webkit-transform: scale(0.83);
 position: absolute;
