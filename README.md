@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="500" height="100" />
+  <img src="https://raw.githubusercontent.com/chec/commercejs-examples/master/assets/logo.svg" width="380" height="100" />
 </p>
 <p align="center">
 This repository is for building `embed.js`, which can be used by small-scale merchants to embed a hosted checkout
