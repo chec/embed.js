@@ -57,9 +57,7 @@ function Embed() {
       setUrl(embedUrl);
       setVisible(true);
 
-      // Prevent whatever the click would've done
-      e.preventDefault();
-      return false;
+      document.getElementsByTagName('body')[0].classList.add('chec-embed--open');
     };
 
     window.addEventListener('click', clickSpy);
@@ -86,6 +84,14 @@ function Embed() {
     };
   }, [visible]);
 
+  /**
+   * Close the modal, and remove the custom class from the body
+   */
+  const handleClose = () => {
+    setVisible(false);
+    document.getElementsByTagName('body')[0].classList.remove('chec-embed--open');
+  }
+
   if (!visible || !url) {
     return null;
   }
@@ -94,10 +100,10 @@ function Embed() {
     <div className="chec-embed">
       <div className="chec-embed__container">
         <iframe src={url} width="100%" height="100%" title="Buy now" className="chec-embed__frame">
-          Your browser does not support frames, please visit {url} directly.
+          Your browser does not support frames, please visit <a href={url}>{url}</a> directly.
         </iframe>
 
-        <button type="button" className="chec-embed__close" onClick={() => setVisible(false)}>
+        <button type="button" className="chec-embed__close" onClick={handleClose}>
           <svg className="chec-embed__close-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.8285 5.17157L5.17164 10.8284" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
             <path d="M5.17151 5.17157L10.8284 10.8284" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>

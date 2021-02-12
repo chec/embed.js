@@ -1,5 +1,10 @@
 .chec-embed {
-  @apply w-screen h-screen fixed top-0 left-0 bg-gray-600 flex items-center justify-center bg-opacity-80;
+  @apply w-screen h-screen fixed top-0 left-0 bg-gray-600 flex items-center justify-center bg-opacity-80 z-50;
+}
+
+/* For the body, prevents scrolling */
+.chec-embed--open {
+  @apply overflow-y-hidden;
 }
 
 .chec-embed__container {
