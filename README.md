@@ -12,28 +12,23 @@ in their website.
 
 ## Installation
 
-Run `npm install` inside the project folder, when you've cloned the project.
+Run `yarn` inside the project folder, when you've cloned the project.
 
 ## Rebuilding source
 
-You will need `grunt` and `grunt-cli` installed, e.g. `npm install -g grunt grunt-cli`.
+To watch and rebuild changes: `yarn start`. This will start a local dev server running at http://localhost:3000, and
+will hot reload in your browser. The default public/index.html file contains a number of buttons that test the snippet.
 
-To watch and rebuild changes:
+The source code is in `src/`, and is written in React, with Tailwind for CSS.
 
-```
-grunt
-```
+### Production
 
-The source code is in `src/`, and is written in CoffeeScript.
-
-The compiled dist files are in `build/`. There is `embed.js` and `embed.unminified.js`, which are minified and not
-minified respectively. You may wish to switch the comments in the script tags of the examples file when testing
-locally so you can use the unminified version and vice-versa, or switch to the stable/production version to
-regression test against it.
+Build for production with `yarn build`. You will need to upload `build/static/css/embed.css` and `build/static/js/embed.js`
+to the Chec CDN (manually at this point): https://cdn.chec.io/v3/embed.css and https://cdn.chec.io/v3/embed.js.
 
 ## Testing
 
-See `examples/default.html` for a variety of test buttons that can be used to try this out as you make changes to it.
+Load up `yarn start` (or `yarn build`, then use `yarn serve` for local server).
 
 ## License
 

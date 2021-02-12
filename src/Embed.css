@@ -1,0 +1,43 @@
+.chec-embed {
+  @apply w-screen h-screen fixed top-0 left-0 bg-gray-600 flex items-center justify-center bg-opacity-80 z-50;
+}
+
+/* For the body, prevents scrolling */
+.chec-embed--open {
+  @apply overflow-y-hidden;
+}
+
+.chec-embed__container {
+  @apply bg-white shadow-2xl;
+  width: 1024px;
+  height: 800px;
+}
+
+.chec-embed__frame {
+  @apply border-none;
+}
+
+.chec-embed__close {
+  @apply
+    flex items-center justify-center rounded-full pl-3 pr-4 py-2 bg-gray-700 text-white text-sm
+    uppercase absolute top-4 right-4 border-none;
+}
+
+.chec-embed__close:hover,
+.chec-embed__close:focus {
+  @apply bg-gray-800 cursor-pointer;
+}
+
+.chec-embed__close-icon {
+  @apply w-6 h-6;
+}
+
+@screen sm {
+  .chec-embed__close {
+    @apply text-xl top-8 right-8 pl-4 pr-6 py-3;
+  }
+
+  .chec-embed__close-icon {
+    @apply w-8 h-8;
+  }
+}

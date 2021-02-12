@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <title>Embed.js testing</title>
+    <style>
+      body {
+        background-image: url('https://image.shutterstock.com/z/stock-photo-bright-colorful-mottled-background-wooden-background-painted-colors-the-texture-of-the-wood-1009499824.jpg');
+        background-size: cover;
+      }
+
+      .content {
+        background: white;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Embed.js testing page</h1>
+      <p>There are a bunch of buttons below, some of them will trigger the embed.js modal overlay to show up, and some won't.</p>
+      <p>Please refer to the readme for more information on how this repo works. Note that the designs on this page are
+      just to show that the modal overlay has some opacity.</p>
+      <ul>
+          <li>A button tag that opens a Ray: <button data-chec-embed-url="https://staging-likable-kale.commercerays.com">Buy now</button></li>
+          <li>A button tag that doesn't: <button>Not a relevant button</button></li>
+          <li>An anchor tag that opens a Ray: <a href="#" data-chec-embed-url="https://staging-likable-kale.commercerays.com">Good anchor</a></li>
+          <li>A button tag that doesn't: <a href="https://commercejs.com">Not a relevant anchor</a></li>
+      </ul>
+
+      <!-- Uncomment the line below if you want to test this file in complete isolation -->
+<!--      <script type="text/javascript" src="https://cdn.chec.io/v3/embed.js" async></script>-->
+    </div>
+  </body>
+</html>
