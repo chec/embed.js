@@ -8,7 +8,7 @@
 }
 
 .chec-embed__container {
-  @apply bg-white shadow-2xl;
+  @apply bg-white shadow-2xl rounded-md overflow-hidden;
   width: 1024px;
   height: 800px;
 }
